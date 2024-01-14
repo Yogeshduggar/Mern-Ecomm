@@ -1,0 +1,40 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Roboto";
+}
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.container {
+  width: 90%;
+  margin: 1vmax auto;
+  padding: 0.45vmax;
+}
+.beauty {
+  font: 500 2vmax cursive;
+  text-align: center;
+  color: black;
+  text-shadow: 1px 0px red, -1px 0px green;
+}
+.page {
+  width: 100vw;
+  max-height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.greenColor {
+  color: green;
+}
+.redColor {
+  color: red;
+}
