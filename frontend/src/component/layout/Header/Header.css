@@ -144,7 +144,8 @@
   left: -27px;
 }
 .mid-navbar .items:hover {
-  color: #ddfcff;
+ 
+  color: #ED8811;
   cursor: pointer;
   transform: translateY(-4px);
 }
@@ -424,7 +425,7 @@
 /*  */
 @keyframes slideIn {
   from {
-    transform: translateY(-100%);
+    transform: translateY(-10%);
   }
   to {
     transform: translateY(0);

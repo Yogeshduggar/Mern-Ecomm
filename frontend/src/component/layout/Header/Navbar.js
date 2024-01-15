@@ -1,8 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import logo from "../../../images/logo.jpg";
+import logo from "../../../images/logo.png";
 import ButtonContext from "../../../context/ButtonContext";
-import { FcHome, FcAbout } from "react-icons/fc";
-import { FaShopify, FaSearch, FaRegWindowClose, FaUser } from "react-icons/fa";
+import {  FaSearch, FaRegWindowClose, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { RiCoupon2Fill } from "react-icons/ri";
 import Search from "./Search";
@@ -27,9 +26,8 @@ const Navbar = (props) => {
 
   // Theme State and Effect
   const [theme, setTheme] = useState({
-    color: "white",
-    backgroundImage:
-      "linear-gradient(to right, rgb(70, 20, 10), rgb(10, 30, 60))",
+    color: "black",
+    backgroundColor: 'white',
   });
 
   useEffect(() => {
@@ -37,15 +35,13 @@ const Navbar = (props) => {
     const handleScroll = () => {
       if (window.scrollY > 500) {
         setTheme({
-          color: "white",
-          backgroundImage:
-            "linear-gradient(to left, rgb(70, 20, 10), rgb(10, 30, 60))",
+          color: "black",
+          backgroundColor: 'white',
         });
       } else {
         setTheme({
-          color: "white",
-          backgroundImage:
-            "linear-gradient(to right, rgb(70, 20, 10), rgb(10, 30, 60))",
+          color: "black",
+          backgroundColor: 'white',
         });
       }
     };
@@ -64,11 +60,11 @@ const Navbar = (props) => {
           <div id="navbar" style={theme} className="slide-in">
             <div className="left-navbar">
               <div className="items">
-                <img src={logo} alt="LOGO"></img>
+                <img src={logo} alt="LOGO" style={{width:"10vw"}}></img>
               </div>
               <div
                 className="items"
-                style={{ letterSpacing: "4px", fontSize: "2vmax" }}
+                style={{ letterSpacing: "4px", fontSize: "2vmax"}}
               >
                 {props.BrandName}
                 <p style={{ letterSpacing: "0px", fontSize: "1.5vmax" }}>
@@ -78,19 +74,19 @@ const Navbar = (props) => {
             </div>
             <div className="mid-navbar">
               {/* Navigation links with icons */}
-              <Link style={{ textDecoration: "none", color: "white" }} to="/">
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 <div
                   className="items"
                   onClick={() => window.innerWidth <= 800 && setBurger(false)}
                 >
                   Home
                   <p style={{ display: "block" }}>
-                    <FcHome />
+                  
                   </p>
                 </div>
               </Link>
               <Link
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ textDecoration: "none", color: "black" }}
                 to="/products"
               >
                 <div
@@ -99,12 +95,12 @@ const Navbar = (props) => {
                 >
                   Products
                   <p style={{ display: "block" }}>
-                    <FaShopify />
+                    
                   </p>
                 </div>
               </Link>
               <Link
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ textDecoration: "none", color: "black" }}
                 to="/coupons"
               >
                 <div
@@ -113,18 +109,18 @@ const Navbar = (props) => {
                 >
                   Coupons
                   <p style={{ display: "block" }}>
-                    <RiCoupon2Fill />
+                   
                   </p>
                 </div>
               </Link>
-              <Link style={{ textDecoration: "none", color: "white" }} to="/">
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
                 <div
                   className="items"
                   onClick={() => window.innerWidth <= 800 && setBurger(false)}
                 >
                   About
                   <p style={{ display: "block" }}>
-                    <FcAbout />
+                    
                   </p>
                 </div>
               </Link>
@@ -143,7 +139,10 @@ const Navbar = (props) => {
                 >
                   <button
                     className="btn"
-                    style={{ padding: "8px 28px" }}
+                    style={{ padding: "8px 28px",
+                            backgroundColor:"black",  
+                            color:"white"      
+                  }}
                     onClick={() => navigate("/cart")}
                   >
                     <span
@@ -173,7 +172,7 @@ const Navbar = (props) => {
                 >
                   <button
                     className="btn"
-                    style={{ padding: "8px 28px" }}
+                    style={{ padding: "8px 28px",color:"white" }}
                     onClick={() => navigate("/login")}
                   >
                     <span

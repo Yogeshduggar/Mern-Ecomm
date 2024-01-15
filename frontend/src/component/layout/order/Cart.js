@@ -5,16 +5,19 @@ import { addItemToCart, removeCartItem } from "../../../actions/cartAction";
 import { useDispatch, useSelector } from "react-redux";
 import empty from "../../../images/Cart-empty.gif";
 import { Link, useNavigate } from "react-router-dom";
+
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const { delivery } = useSelector((state) => state.controller);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
     }
   }, [isAuthenticated, navigate]);
+
   const { cart } = useSelector((state) => state);
   const increaseQty = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -22,22 +25,24 @@ const Cart = () => {
     if (newQty > stock || newQty > 15) return;
     dispatch(addItemToCart(userId, id, newQty));
   };
+
   const decreaseQty = (id, quantity, stock) => {
     const newQty = quantity - 1;
     if (newQty < 1) return;
     dispatch(addItemToCart(userId, id, newQty));
   };
 
-  let userId = user.user.user?._id || user.user?._id || user?._id;
+  let userId = user?.user?.user?._id || user?.user?._id || user?._id;
   userId = userId?.toString();
   const cartItems = cart[userId]?.cartItems || [];
 
   const checkOutHandler = () => {
     navigate("/shipping");
   };
+
   return (
     <>
-      {cartItems?.length === 0 ? (
+      {cartItems && cartItems.length === 0 ? (
         <div
           className="cartpage"
           style={{
@@ -85,39 +90,37 @@ const Cart = () => {
               <p>Subtotal</p>
             </div>
 
-            {cartItems &&
-              cartItems[0] &&
-              cartItems.map((item) => (
-                <div
-                  className="cartContainer"
-                  key={item.product}
-                  style={{ backgroundColor: "white" }}
-                >
-                  <CardItemCard item={item} removeCartItem={removeCartItem} />
-                  <div className="cartInput">
-                    <button
-                      onClick={() =>
-                        decreaseQty(item.product, item.quantity, item.stock)
-                      }
-                    >
-                      -
-                    </button>
-                    <input type="text" value={item.quantity} readOnly />
-                    <button
-                      onClick={() =>
-                        increaseQty(item.product, item.quantity, item.stock)
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-                  <p className="cardSubTotal">{`₹${
-                    (user && user?.user?.role === "user"
-                      ? item.price[1]
-                      : item.price[0]) * item.quantity
-                  }`}</p>
+            {cartItems && cartItems.length > 0 && cartItems.map((item) => (
+              <div
+                className="cartContainer"
+                key={item.product}
+                style={{ backgroundColor: "white" }}
+              >
+                <CardItemCard item={item} removeCartItem={removeCartItem} />
+                <div className="cartInput">
+                  <button
+                    onClick={() =>
+                      decreaseQty(item.product, item.quantity, item.stock)
+                    }
+                  >
+                    -
+                  </button>
+                  <input type="text" value={item.quantity} readOnly />
+                  <button
+                    onClick={() =>
+                      increaseQty(item.product, item.quantity, item.stock)
+                    }
+                  >
+                    +
+                  </button>
                 </div>
-              ))}
+                <p className="cardSubTotal">{`₹${
+                  (user && user?.user?.role === "user"
+                    ? item.price[1]
+                    : item.price[0]) * item.quantity
+                }`}</p>
+              </div>
+            ))}
 
             <div
               className="cartGrossTotal"
@@ -150,19 +153,12 @@ const Cart = () => {
                   }}
                 >
                   <p>Delivery Charges</p>
-                  <p>{`+${
-                    cartItems.reduce(
-                      (acc, item) =>
-                        acc +
-                        item.quantity *
-                          (user && user?.user?.role === "user"
-                            ? item.price[1]
-                            : item.price[0]),
-                      0
-                    ) > 500
-                      ? delivery[0]
-                      : delivery[1]
-                  }`}</p>
+                  <p>{
+                    `${cartItems.reduce((acc, item) => {
+                      const itemPrice = user && user.user?.role === "user" ? item.price[1] : item.price[0];
+                      return acc + item.quantity * itemPrice;
+                    }, 0) > 500 ? 0: 70}`
+                  }</p>
                 </div>
                 <div style={{ borderTop: "1px ridge black" }}>
                   <p>Payable Amount</p>
@@ -185,8 +181,8 @@ const Cart = () => {
                             : item.price[0]),
                       0
                     ) > 500
-                      ? delivery[0]
-                      : delivery[1])
+                      ? 0
+                      : 70)
                   }`}</p>
                 </div>
               </div>

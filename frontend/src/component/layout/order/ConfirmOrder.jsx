@@ -6,8 +6,8 @@ import { Typography } from "@mui/material";
 import "./order.css";
 const ConfirmOrder = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  const { delivery } = useSelector((state) => state.controller);
-  const [first, sec] = delivery;
+  // const { delivery } = useSelector((state) => state.controller);
+  // const [first, sec] = delivery;
 
   const { cart } = useSelector((state) => state);
   const userId = user?.user?._id;
@@ -26,10 +26,10 @@ const ConfirmOrder = () => {
         item.quantity,
     0
   );
-  let shippingCharges = subTotal > 500 ? first : sec;
+  let shippingCharges = subTotal > 500 ? 0 : 70;
   const gst = 0;
 
-  const total = (subTotal > 500 ? first : sec) + subTotal;
+  const total = (subTotal > 500 ? 0 : 70) + subTotal;
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, India`;
   const navigate = useNavigate();
   useEffect(() => {
