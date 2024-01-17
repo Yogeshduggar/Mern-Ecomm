@@ -172,7 +172,7 @@ const Navbar = (props) => {
                 >
                   <button
                     className="btn"
-                    style={{ padding: "8px 28px",color:"white" }}
+                    style={{ padding: "8px 28px",color:"white",backgroundColor:"black"}}
                     onClick={() => navigate("/login")}
                   >
                     <span
